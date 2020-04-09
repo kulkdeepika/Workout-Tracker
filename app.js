@@ -7,11 +7,10 @@ const router = express.Router();
 
 //api-routes=============================================================================
 
+// Send the workout data for the index page to display the last workout
 router.get("/api/workouts", (req, res) => {
-    console.log("Get Route Hit!!");
     db.Workout.find({})
         .then(dbWorkout => {
-            console.log("find all workouts executed successfully");
             console.log(dbWorkout)
             res.json(dbWorkout);
         })
@@ -21,6 +20,7 @@ router.get("/api/workouts", (req, res) => {
         })
 });
 
+// add a new workout to the database
 router.post("/api/workouts", (req, res)=>{
     console.log("api route, post");
     const workout = new db.Workout(req.body);
@@ -36,6 +36,7 @@ router.post("/api/workouts", (req, res)=>{
         })
 });
 
+// add a new exercise to the existing workout in the database
 router.put("/api/workouts/:id", (req, res) => {
     console.log("api route, put");
     console.log(req.body);
@@ -46,6 +47,7 @@ router.put("/api/workouts/:id", (req, res) => {
     }).catch(err => {console.log(err); res.json(err);});
 });
 
+//send the data to be displayed in the dashboard.We reverse the array so that the latest data can be displayed
 router.get("/api/workouts/range", (req, res)=>{
     console.log("api route, get , range");
     db.Workout.find({})
@@ -71,11 +73,5 @@ router.get("/stats", (req, res)=>{
     console.log("html route, get, stats");
     res.sendFile(path.join(__dirname + "/public/stats.html"));
 });
-
-router.get("/", (req,res)=>{
-    console.log("Here Here")
-    res.sendFile(path.join(__dirname + "/public/index.html"));
-})
-
 
 module.exports = router;

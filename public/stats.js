@@ -10,7 +10,6 @@ fetch("/api/workouts/range")
     populateChart(data);
   });
 
-
 //API.getWorkoutsInRange()
 
   function generatePalette() {
@@ -196,7 +195,7 @@ function duration(data) {
       durations.push(exercise.duration);
     });
   });
-
+  
   return durations;
 }
 
@@ -208,29 +207,19 @@ function calculateTotalWeight(data) {
       total.push(exercise.weight);
     });
   });
+
   console.log(total);
   return total;
 }
 
 function workoutNames(data) {
   let workouts = [];
-  //let weeklyWorkouts = [];
 
   data.forEach(workout => {
     workout.exercises.forEach(exercise => {
       workouts.push(exercise.name);
     });
   });
-
-  //console.log("Workouts Array: ");
-  //console.log(workouts);
-
-  // for(let i=workouts.length - 1, j=0; i>workouts.length - 8; i--,j++){
-  //   weeklyWorkouts[j] = workouts[i];
-  // }
-
-  // console.log("weeklyWorkouts Array: ");
-  // console.log(weeklyWorkouts);
   
   return workouts;
 }
